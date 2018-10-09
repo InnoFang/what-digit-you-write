@@ -114,6 +114,3 @@ out
 gen
 .gitignore
 .idea/
-app.py
-static/
-templates/
