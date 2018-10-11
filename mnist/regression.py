@@ -1,18 +1,17 @@
 import os
+import tensorflow as tf
+from mnist.input import mnist
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-
-import tensorflow as tf
-from mnist.load_data import mnist
 
 x = tf.placeholder(tf.float32, shape=[None, 784])
 y_ = tf.placeholder(tf.float32, shape=[None, 10])
 
 W = tf.Variable(tf.zeros([784, 10]), dtype=tf.float32, name="weights")
 b = tf.Variable(tf.zeros([10]), dtype=tf.float32, name="biases")
+y = tf.nn.softmax(tf.matmul(x, W) + b)
 
 # train
-y = tf.nn.softmax(tf.matmul(x, W) + b)
 cross_entropy = -tf.reduce_sum(y_ * tf.log(y))
 train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
 correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
