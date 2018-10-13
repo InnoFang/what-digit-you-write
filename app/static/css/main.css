@@ -1,9 +1,42 @@
+* {
+    margin: 20px;
+}
+
 body {
-    padding: 3em;
+    padding: 1em;
 }
 
 #canvas {
     display: block;
-    margin: 0;
-    border: 1px solid #696969;
+    border-radius: 5px;
+    background: #e8fffa;
+    box-shadow: 3px 3px 3px 3px #ececec;
+}
+
+#clear {
+    -moz-box-shadow: 0px 0px 30px 0px #2196F3;
+    -webkit-box-shadow: 0px 0px 30px 0px #2196F3;
+    box-shadow: 0px 0px 30px 0px #2196F3;
+    background-color: #03A9F4;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Trebuchet MS;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 7px 53px;
+    text-decoration: none;
+    text-shadow: 0px 0px 18px #2f6627;
+}
+
+#clear:hover {
+    background-color: #cc00cc;
+}
+
+#clear:active {
+    position: relative;
+    top: 1px;
 }

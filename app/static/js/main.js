@@ -1,8 +1,10 @@
 window.onload = () => {
+    const clear = document.getElementById("clear");
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
     const lineWidth = 10;
-    const lineColor = "#000";
+    const lineColor = "#000000";
+    const background = "#e8fffa";
     const canvasWidth = 561; // 20 * 28 + 1
     const canvasHeight = 561; // 20 * 28 + 1
 
@@ -33,11 +35,6 @@ window.onload = () => {
         }
     }
 
-    function clear() {
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-
-    }
-
     canvas.onmousedown = function (e) {
         isDrawing = true;
         curPos = getPosition(e.clientX, e.clientY);
@@ -50,5 +47,10 @@ window.onload = () => {
 
     canvas.onmouseup = function (e) {
         isDrawing = false;
+    };
+
+    clear.onclick = function () {
+        console.log("click");
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     }
 };
