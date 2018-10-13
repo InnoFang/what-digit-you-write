@@ -5,13 +5,86 @@
     <title>What digit you write?</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+{#    <!-- Compiled and minified CSS -->#}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">#}
+{##}
+{#    <!-- Compiled and minified JavaScript -->#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>#}
 </head>
 <body>
 
 <h1>What digit you write?</h1>
 <hr/>
+<div class="content">
 
-<canvas id="canvas"></canvas>
-<a href="#" id="clear">clear</a>
+    <div class="content-left">
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <div class="content-center">
+        <canvas id="picture"></canvas>
+        <a href="#" id="reset">reset</a>
+    </div>
+    <div class="content-right">
+        <table class="striped">
+            <tr>
+                <th class="th-1">&nbsp;</th>
+                <th class="th-2">regression</th>
+                <th class="th-3">cnn</th>
+            </tr>
+            <tr>
+                <th>0</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>1</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>4</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>5</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>6</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>7</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>8</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>9</th>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</div>
 </body>
 </html>

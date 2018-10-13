@@ -1,17 +1,21 @@
 window.onload = () => {
-    const clear = document.getElementById("clear");
+    const reset = document.getElementById("reset");
+    const picture = document.getElementById("picture");
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
     const lineWidth = 10;
     const lineColor = "#000000";
-    const background = "#e8fffa";
     const canvasWidth = 561; // 20 * 28 + 1
     const canvasHeight = 561; // 20 * 28 + 1
+    const pictureWidth = 140; // 5 * 28
+    const pictureHeight = 140; // 5 * 28
 
     let isDrawing = false;
     let curPos; // current position
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
+    picture.width = pictureWidth;
+    picture.height = pictureHeight;
 
 
     function getPosition(clientX, clientY) {
@@ -49,7 +53,7 @@ window.onload = () => {
         isDrawing = false;
     };
 
-    clear.onclick = function () {
+    reset.onclick = function () {
         console.log("click");
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     }
