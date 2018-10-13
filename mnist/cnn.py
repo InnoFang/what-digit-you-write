@@ -34,6 +34,19 @@ def max_pool_2x2(x):
 x = tf.placeholder(tf.float32, shape=[None, 784])
 y_ = tf.placeholder(tf.float32, shape=[None, 10])
 
+
+"""
+Defining the Constant
+"""
+learning_rate = 1e-4
+n_iterations = 2000
+batch_size = 50
+dropout = 0.5
+
+
+"""
+Building the TensorFlow Graph
+"""
 # input layer
 W_conv1 = weight_variable([5, 5, 1, 32])
 b_conv1 = bias_variable([32])
@@ -67,21 +80,24 @@ b_fc2 = bias_variable([10])
 
 y_conv = tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)
 
-# train
+
+"""
+Training and Testing
+"""
 cross_entropy = -tf.reduce_sum(y_ * tf.log(y_conv))
-train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
+train_step = tf.train.AdamOptimizer(learning_rate).minimize(cross_entropy)
 correct_prediction = tf.equal(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, dtype=tf.float32))
 
 saver = tf.train.Saver()
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
-    for i in range(20000):
-        batch = mnist.train.next_batch(50)
+    for i in range(n_iterations):
+        batch_x, batch_y = mnist.train.next_batch(batch_size)
         if i % 100 == 0:
-            train_accuracy = sess.run(accuracy, feed_dict={x: batch[0], y_: batch[1], keep_prob: 1.0})
+            train_accuracy = sess.run(accuracy, feed_dict={x: batch_x, y_: batch_y, keep_prob: 1.0})
             print("Step %d, training accuracy %g" % (i, train_accuracy))
-        sess.run(train_step, feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.5})
+        sess.run(train_step, feed_dict={x: batch_x, y_: batch_y, keep_prob: dropout})
 
     print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
 
