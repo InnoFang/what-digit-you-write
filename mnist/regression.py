@@ -5,12 +5,8 @@ from mnist import model
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
-"""
-Defining the Constant
-"""
 n_iterations = 2000
 batch_size = 50
-
 
 x = tf.placeholder(tf.float32, shape=[None, 784])
 y_ = tf.placeholder(tf.float32, shape=[None, 10])

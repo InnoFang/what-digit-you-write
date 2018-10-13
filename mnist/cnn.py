@@ -5,9 +5,6 @@ from mnist import model
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
-"""
-Defining the Constant
-"""
 learning_rate = 1e-4
 n_iterations = 2000
 batch_size = 50
