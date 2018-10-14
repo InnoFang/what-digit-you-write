@@ -23,20 +23,21 @@ train_step = tf.train.AdamOptimizer(learning_rate).minimize(cross_entropy)
 correct_prediction = tf.equal(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, dtype=tf.float32))
 
-saver = tf.train.Saver(variables)
-with tf.Session() as sess:
-    sess.run(tf.global_variables_initializer())
-    for i in range(n_iterations):
-        batch_x, batch_y = mnist.train.next_batch(batch_size)
-        if i % 100 == 0:
-            train_accuracy = sess.run(accuracy, feed_dict={x: batch_x, y_: batch_y, keep_prob: 1.0})
-            print("Step %d, training accuracy %g" % (i, train_accuracy))
-        sess.run(train_step, feed_dict={x: batch_x, y_: batch_y, keep_prob: dropout})
+if __name__ == '__main__':
+    saver = tf.train.Saver(variables)
+    with tf.Session() as sess:
+        sess.run(tf.global_variables_initializer())
+        for i in range(n_iterations):
+            batch_x, batch_y = mnist.train.next_batch(batch_size)
+            if i % 100 == 0:
+                train_accuracy = sess.run(accuracy, feed_dict={x: batch_x, y_: batch_y, keep_prob: 1.0})
+                print("Step %d, training accuracy %g" % (i, train_accuracy))
+            sess.run(train_step, feed_dict={x: batch_x, y_: batch_y, keep_prob: dropout})
 
-    print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
+        print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
 
-    save_path = saver.save(sess,
-                           os.path.join(os.path.dirname(__file__), 'model', 'cnn.ckpt'),
-                           write_meta_graph=False, write_state=False)
+        save_path = saver.save(sess,
+                               os.path.join(os.path.dirname(__file__), 'model', 'cnn.ckpt'),
+                               write_meta_graph=False, write_state=False)
 
-    print('Saved: ', save_path)
+        print('Saved: ', save_path)
