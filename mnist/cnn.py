@@ -13,7 +13,7 @@ dropout = 0.5
 x = tf.placeholder(tf.float32, shape=[None, 784])
 y_ = tf.placeholder(tf.float32, shape=[None, 10])
 keep_prob = tf.placeholder(dtype=tf.float32)
-y_conv, variables = model.convolutional(x, keep_prob)
+y_conv, variables = model.cnn(x, keep_prob)
 
 """
 Training and Testing

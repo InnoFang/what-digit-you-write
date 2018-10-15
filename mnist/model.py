@@ -1,4 +1,17 @@
 import tensorflow as tf
+import pkg_resources
+
+resource_package = __name__
+
+
+def regression_model():
+    path = pkg_resources.resource_filename(resource_package, 'model/regression.ckpt')
+    return path
+
+
+def cnn_model():
+    path = pkg_resources.resource_filename(resource_package, 'model/cnn.ckpt')
+    return path
 
 
 # Softmax Regression Model
@@ -10,7 +23,7 @@ def regression(x):
 
 
 # Multilayer Convolutional Network
-def convolutional(x, keep_prob):
+def cnn(x, keep_prob):
     def weight_variable(shape):
         initial = tf.truncated_normal(shape=shape, stddev=0.1)
         return tf.Variable(initial)
