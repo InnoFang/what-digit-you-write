@@ -1,17 +1,4 @@
 import tensorflow as tf
-import pkg_resources
-
-resource_package = __name__
-
-
-def regression_model():
-    path = pkg_resources.resource_filename(resource_package, 'model/regression.ckpt')
-    return path
-
-
-def cnn_model():
-    path = pkg_resources.resource_filename(resource_package, 'model/cnn.ckpt')
-    return path
 
 
 # Softmax Regression Model
