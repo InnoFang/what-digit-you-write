@@ -72,6 +72,17 @@ window.onload = () => {
                     picCtx.fillRect(j * 5, i * 5, 5, 5)
                 }
             }
+
+            $.ajax({
+                url: "/input",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(inputs),
+                success: (ret) => {
+                    console.log(ret)
+                }
+            });
+
         };
     };
 
