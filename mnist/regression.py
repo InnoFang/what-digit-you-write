@@ -1,16 +1,19 @@
 import os
 import tensorflow as tf
 from mnist.input import mnist
-from mnist import model
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 n_iterations = 2000
 batch_size = 50
 
-x = tf.placeholder(tf.float32, shape=[None, 784])
-y_ = tf.placeholder(tf.float32, shape=[None, 10])
-y, variables = model.regression(x)
+with tf.variable_scope("regression"):
+    x = tf.placeholder(tf.float32, shape=[None, 784], name="x")
+    y_ = tf.placeholder(tf.float32, shape=[None, 10], name="y_")
+    W = tf.Variable(tf.zeros([784, 10]), dtype=tf.float32, name="weights")
+    b = tf.Variable(tf.zeros([10]), dtype=tf.float32, name="biases")
+    y = tf.nn.softmax(tf.matmul(x, W) + b, name="regression")
+
 
 """
 Training and Testing
@@ -30,7 +33,7 @@ if __name__ == '__main__':
         print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
 
         save_path = saver.save(sess,
-                               os.path.join(os.path.dirname(__file__), 'model', 'regression.ckpt'),
-                               write_meta_graph=False, write_state=False)
+                               os.path.join(os.path.dirname(__file__), 'model', 'regression'),
+                               global_step=1000)
 
         print('Saved: ', save_path)

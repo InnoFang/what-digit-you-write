@@ -58,9 +58,11 @@ window.onload = () => {
         img.src = canvas.toDataURL();
         img.onload = function () {
             let inputs = [];
-            const input = document.createElement("canvas").getContext('2d');
+            const c = document.createElement("canvas");
+            const input = c.getContext('2d');
             input.drawImage(img, 0, 0, img.width, img.height, 0, 0, 28, 28);
             let data = input.getImageData(0, 0, 28, 28).data;
+            console.log(c.toDataURL());
             for (let i = 0; i < 28; ++i) {
                 for (let j = 0; j < 28; ++j) {
                     let px = 4 * (i * 28 + j);

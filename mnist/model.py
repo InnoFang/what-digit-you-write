@@ -3,9 +3,7 @@ import tensorflow as tf
 
 # Softmax Regression Model
 def regression(x):
-    W = tf.Variable(tf.zeros([784, 10]), dtype=tf.float32, name="weights")
-    b = tf.Variable(tf.zeros([10]), dtype=tf.float32, name="biases")
-    y = tf.nn.softmax(tf.matmul(x, W) + b)
+
     return y, [W, b]
 
 
