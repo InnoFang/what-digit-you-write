@@ -1,12 +1,6 @@
 import tensorflow as tf
 
 
-# Softmax Regression Model
-def regression(x):
-
-    return y, [W, b]
-
-
 # Multilayer Convolutional Network
 def cnn(x, keep_prob):
     def weight_variable(shape):
