@@ -76,7 +76,7 @@ window.onload = () => {
             }
 
             $.ajax({
-                url: "/input",
+                url: "/predict",
                 method: "POST",
                 contentType: "application/json",
                 data: JSON.stringify(inputs),

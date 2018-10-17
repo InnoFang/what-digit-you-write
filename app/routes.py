@@ -3,11 +3,11 @@ from app import app
 
 
 @app.route('/', methods=['GET'])
-def hello_world():
+def index():
     return render_template('index.html')
 
 
-@app.route('/input', methods=['POST'])
-def input():
+@app.route('/predict', methods=['POST'])
+def predict():
     print(request.json)
     return jsonify('yes')
