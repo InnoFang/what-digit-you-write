@@ -5,11 +5,14 @@ import os
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
-if __name__ == '__main__':
-    img = np.invert(Image.open("1.png").convert('L')).ravel().reshape((1, 784))
+img = np.invert(Image.open("1.png").convert('L')).ravel().reshape((1, 784))
+
+
+def regression_predict():
     with tf.Session() as sess:
-        saver = tf.train.import_meta_graph(os.path.join(os.path.dirname(__file__), "model/regression-1000.meta"))
-        saver.restore(sess, tf.train.latest_checkpoint('./model/'))
+        saver = tf.train.import_meta_graph(
+            os.path.join(os.path.dirname(__file__), "model/regression/regression-1000.meta"))
+        saver.restore(sess, tf.train.latest_checkpoint('./model/regression/'))
 
         graph = tf.get_default_graph()
         x = graph.get_tensor_by_name("x:0")
@@ -18,3 +21,21 @@ if __name__ == '__main__':
         regression = graph.get_tensor_by_name("regression:0")
 
         print(sess.run(regression, feed_dict).flatten().tolist())
+
+
+def cnn_predict():
+    with tf.Session() as sess:
+        saver = tf.train.import_meta_graph(os.path.join(os.path.dirname(__file__), "model/cnn/cnn-1000.meta"))
+        saver.restore(sess, tf.train.latest_checkpoint('./model/cnn/'))
+
+        graph = tf.get_default_graph()
+        x = graph.get_tensor_by_name("x:0")
+        keep_prob = graph.get_tensor_by_name("keep_prob:0")
+        feed_dict = {x: img, keep_prob: 1.0}
+
+        cnn = graph.get_tensor_by_name("y_conv:0")
+        print(sess.run(cnn, feed_dict).flatten().tolist())
+
+
+if __name__ == '__main__':
+    cnn_predict()
