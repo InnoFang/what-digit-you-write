@@ -7,11 +7,12 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 n_iterations = 2000
 batch_size = 50
 
-x = tf.placeholder(tf.float32, shape=[None, 784], name="x")
-y_ = tf.placeholder(tf.float32, shape=[None, 10], name="y_")
-W = tf.Variable(tf.zeros([784, 10]), dtype=tf.float32, name="weights")
-b = tf.Variable(tf.zeros([10]), dtype=tf.float32, name="biases")
-y = tf.nn.softmax(tf.matmul(x, W) + b, name="regression")
+with tf.variable_scope("regression"):
+    x = tf.placeholder(tf.float32, shape=[None, 784], name="x")
+    y_ = tf.placeholder(tf.float32, shape=[None, 10], name="y_")
+    W = tf.Variable(tf.zeros([784, 10]), dtype=tf.float32, name="weights")
+    b = tf.Variable(tf.zeros([10]), dtype=tf.float32, name="biases")
+    y = tf.nn.softmax(tf.matmul(x, W) + b, name="y")
 
 """
 Training and Testing

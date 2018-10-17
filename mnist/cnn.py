@@ -1,7 +1,6 @@
 import os
 import tensorflow as tf
 from mnist.input import mnist
-from mnist import model
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
@@ -9,10 +8,6 @@ learning_rate = 1e-4
 n_iterations = 2000
 batch_size = 50
 dropout = 0.5
-
-x = tf.placeholder(tf.float32, shape=[None, 784], name="x")
-y_ = tf.placeholder(tf.float32, shape=[None, 10], name="y_")
-keep_prob = tf.placeholder(dtype=tf.float32, name="keep_prob")
 
 
 def weight_variable(shape):
@@ -41,35 +36,40 @@ def max_pool_2x2(x):
         padding='SAME')
 
 
-"""
-Building the TensorFlow Graph
-"""
-# 1st layer
-W_conv1 = weight_variable([5, 5, 1, 32], )
-b_conv1 = bias_variable([32])
-x_image = tf.reshape(x, [-1, 28, 28, 1])  # 28x28 gray image
-h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
-h_pool1 = max_pool_2x2(h_conv1)
+with tf.variable_scope("cnn"):
+    x = tf.placeholder(tf.float32, shape=[None, 784], name="x")
+    y_ = tf.placeholder(tf.float32, shape=[None, 10], name="y_")
+    keep_prob = tf.placeholder(dtype=tf.float32, name="keep_prob")
 
-# 2nd layer
-W_conv2 = weight_variable([5, 5, 32, 64])
-b_conv2 = bias_variable([64])
-h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)
-h_pool2 = max_pool_2x2(h_conv2)
+    """
+    Building the TensorFlow Graph
+    """
+    # 1st layer
+    W_conv1 = weight_variable([5, 5, 1, 32], )
+    b_conv1 = bias_variable([32])
+    x_image = tf.reshape(x, [-1, 28, 28, 1])  # 28x28 gray image
+    h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
+    h_pool1 = max_pool_2x2(h_conv1)
 
-# densely connected layer
-W_fc1 = weight_variable([7 * 7 * 64, 1024])
-b_fc1 = bias_variable([1024])
-h_pool2_flat = tf.reshape(h_pool2, [-1, 7 * 7 * 64])
-h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
+    # 2nd layer
+    W_conv2 = weight_variable([5, 5, 32, 64])
+    b_conv2 = bias_variable([64])
+    h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)
+    h_pool2 = max_pool_2x2(h_conv2)
 
-# dropout
-h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
+    # densely connected layer
+    W_fc1 = weight_variable([7 * 7 * 64, 1024])
+    b_fc1 = bias_variable([1024])
+    h_pool2_flat = tf.reshape(h_pool2, [-1, 7 * 7 * 64])
+    h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
 
-# output layer
-W_fc2 = weight_variable([1024, 10])
-b_fc2 = bias_variable([10])
-y_conv = tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2, name="y_conv")
+    # dropout
+    h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
+
+    # output layer
+    W_fc2 = weight_variable([1024, 10])
+    b_fc2 = bias_variable([10])
+    y_conv = tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2, name="y_conv")
 
 """
 Training and Testing

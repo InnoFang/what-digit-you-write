@@ -15,10 +15,10 @@ def regression_predict():
         saver.restore(sess, tf.train.latest_checkpoint('./model/regression/'))
 
         graph = tf.get_default_graph()
-        x = graph.get_tensor_by_name("x:0")
+        x = graph.get_tensor_by_name("regression/x:0")
         feed_dict = {x: img}
 
-        regression = graph.get_tensor_by_name("regression:0")
+        regression = graph.get_tensor_by_name("regression/y:0")
 
         print(sess.run(regression, feed_dict).flatten().tolist())
 
@@ -29,13 +29,14 @@ def cnn_predict():
         saver.restore(sess, tf.train.latest_checkpoint('./model/cnn/'))
 
         graph = tf.get_default_graph()
-        x = graph.get_tensor_by_name("x:0")
+        x = graph.get_tensor_by_name("cnn/x:0")
         keep_prob = graph.get_tensor_by_name("keep_prob:0")
         feed_dict = {x: img, keep_prob: 1.0}
 
-        cnn = graph.get_tensor_by_name("y_conv:0")
+        cnn = graph.get_tensor_by_name("cnn/y_conv:0")
         print(sess.run(cnn, feed_dict).flatten().tolist())
 
 
 if __name__ == '__main__':
-    cnn_predict()
+    regression_predict()
+    # cnn_predict()
