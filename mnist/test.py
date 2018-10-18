@@ -20,11 +20,9 @@ def test_regression():
         print([n.name for n in graph.as_graph_def().node])
 
         x = graph.get_tensor_by_name("regression/x:0")
-        w = graph.get_tensor_by_name("regression/weights:0")
-        b = graph.get_tensor_by_name("regression/biases:0")
         feed_dict = {x: img}
 
-        regression = graph.get_tensor_by_name("regression/y:0")
+        regression = graph.get_tensor_by_name("y:0")
 
         print(sess.run(regression, feed_dict).flatten().tolist())
 
@@ -40,13 +38,13 @@ def test_cnn():
         print([n.name for n in graph.as_graph_def().node])
 
         x = graph.get_tensor_by_name("cnn/x:0")
-        keep_prob = graph.get_tensor_by_name("cnn/keep_prob:0")
+        keep_prob = graph.get_tensor_by_name("keep_prob:0")
         feed_dict = {x: img, keep_prob: 1.0}
 
-        cnn = graph.get_tensor_by_name("cnn/y_conv:0")
+        cnn = graph.get_tensor_by_name("y_conv:0")
         print(sess.run(cnn, feed_dict).flatten().tolist())
 
 
 if __name__ == '__main__':
-    test_regression()
     test_cnn()
+    test_regression()
