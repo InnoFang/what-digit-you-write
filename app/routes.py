@@ -12,4 +12,4 @@ def index():
 @app.route('/predict', methods=['POST'])
 def predict():
     input_data = ((255 - np.array(request.json, dtype=np.uint8)) / 255.0).reshape(1, 784)
-    return jsonify(result=[regression_predict(input_data), regression_predict(input_data)])
+    return jsonify(data=[regression_predict(input_data), regression_predict(input_data)])

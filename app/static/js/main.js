@@ -83,7 +83,7 @@ window.onload = () => {
                         let max = 0;
                         let max_idx = 0;
                         for (let j = 0; j < 10; ++j) {
-                            let value = ret.result[i][j];
+                            let value = ret.data[i][j];
                             let tmp = value * 1000;
                             if (tmp > max) {
                                 max = tmp;
@@ -96,9 +96,9 @@ window.onload = () => {
                         for (let j = 0; j < 10; ++j) {
                             let node = $('.result tr').eq(j + 1).find('td').eq(i);
                             if (j === max_idx) {
-                                node.addClass('ans');
+                                node.addClass('answer');
                             } else {
-                                node.removeClass('ans');
+                                node.removeClass('answer');
                             }
                         }
                     }
@@ -115,5 +115,7 @@ window.onload = () => {
         picCtx.fillStyle = "#ffffff";
         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
         picCtx.fillRect(0, 0, picture.width, picture.height);
+
+        $('.result td').text('').removeClass('answer');
     }
 };
