@@ -18,7 +18,7 @@ def regression_predict(input_data):
         graph = tf.get_default_graph()
 
         # print all tensor name
-        print([n.name for n in graph.as_graph_def().node])
+        # print([n.name for n in graph.as_graph_def().node])
 
         x = graph.get_tensor_by_name("regression/x:0")
         feed_dict = {x: input_data}
@@ -35,7 +35,7 @@ def cnn_predict(input_data):
         graph = tf.get_default_graph()
 
         # print all tensor name
-        print([n.name for n in graph.as_graph_def().node])
+        # print([n.name for n in graph.as_graph_def().node])
 
         x = graph.get_tensor_by_name("cnn/x:0")
         keep_prob = graph.get_tensor_by_name("cnn/keep_prob:0")
