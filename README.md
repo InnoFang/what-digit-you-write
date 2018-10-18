@@ -4,6 +4,8 @@
 
 Handwritten digit recognition implemented by tensorflow and flask.
 
+![](https://user-images.githubusercontent.com/15724026/47161756-40403300-d325-11e8-81b6-d1ed597fd452.gif)
+
 ## References
 
  + [tensorflow-mnist](https://github.com/sugyan/tensorflow-mnist)
