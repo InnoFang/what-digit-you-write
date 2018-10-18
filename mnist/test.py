@@ -9,6 +9,7 @@ img = np.invert(Image.open("1.png").convert('L')).ravel().reshape((1, 784))
 
 
 def test_regression():
+    tf.reset_default_graph()
     with tf.Session() as sess:
         saver = tf.train.import_meta_graph(
             os.path.join(os.path.dirname(__file__), "model/regression/regression-1000.meta"))
@@ -28,6 +29,7 @@ def test_regression():
 
 
 def test_cnn():
+    tf.reset_default_graph()
     with tf.Session() as sess:
         saver = tf.train.import_meta_graph(os.path.join(os.path.dirname(__file__), "model/cnn/cnn-1000.meta"))
         saver.restore(sess, tf.train.latest_checkpoint('./model/cnn/'))
