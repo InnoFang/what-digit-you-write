@@ -79,7 +79,29 @@ window.onload = () => {
                 contentType: "application/json",
                 data: JSON.stringify(inputs),
                 success: (ret) => {
-                    console.log(ret)
+                    for (let i = 0; i < 2; ++i) {
+                        let max = 0;
+                        let max_idx = 0;
+                        for (let j = 0; j < 10; ++j) {
+                            let value = ret.result[i][j];
+                            let tmp = value * 1000;
+                            if (tmp > max) {
+                                max = tmp;
+                                max_idx = j;
+                            }
+                            value = parseFloat(value.toFixed(3));
+                            $('.result tr').eq(j + 1).find('td').eq(i).text(value);
+                        }
+
+                        for (let j = 0; j < 10; ++j) {
+                            let node = $('.result tr').eq(j + 1).find('td').eq(i);
+                            if (j === max_idx) {
+                                node.addClass('ans');
+                            } else {
+                                node.removeClass('ans');
+                            }
+                        }
+                    }
                 }
             });
 

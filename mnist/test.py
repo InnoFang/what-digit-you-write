@@ -20,6 +20,8 @@ def test_regression():
         print([n.name for n in graph.as_graph_def().node])
 
         x = graph.get_tensor_by_name("regression/x:0")
+        w = graph.get_tensor_by_name("regression/weights:0")
+        b = graph.get_tensor_by_name("regression/biases:0")
         feed_dict = {x: img}
 
         regression = graph.get_tensor_by_name("regression/y:0")
@@ -46,5 +48,5 @@ def test_cnn():
 
 
 if __name__ == '__main__':
-    # test_regression()
+    test_regression()
     test_cnn()
