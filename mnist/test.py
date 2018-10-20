@@ -3,6 +3,9 @@ import numpy as np
 from PIL import Image
 import os
 
+# On my machine, I have to use the CPU
+# because occured some problem when i using the GPU,
+# so you can comment the code below for better speed
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 img = np.invert(Image.open("1.png").convert('L')).ravel().reshape((1, 784))

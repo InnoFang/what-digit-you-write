@@ -2,6 +2,9 @@ import os
 import tensorflow as tf
 from mnist.input import mnist
 
+# On my machine, I have to use the CPU
+# because occured some problem when i using the GPU,
+# so you can comment the code below for better speed
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 n_iterations = 2000

@@ -18,6 +18,7 @@ window.onload = () => {
     picture.width = pictureWidth;
     picture.height = pictureHeight;
 
+    /* The purpose of the first clear is to fill the canvas with a white background. */
     clear();
 
     function getPosition(clientX, clientY) {
@@ -59,6 +60,7 @@ window.onload = () => {
         img.onload = function () {
             let inputs = [];
             const input = document.createElement("canvas").getContext('2d');
+            /* Map the original data size to a size of 28*28 (28 * 28 = 784) */
             input.drawImage(img, 0, 0, img.width, img.height, 0, 0, 28, 28);
             let data = input.getImageData(0, 0, 28, 28).data;
             for (let i = 0; i < 28; ++i) {
@@ -68,6 +70,7 @@ window.onload = () => {
                     let g = data[px + 1];
                     let b = data[px + 2];
                     inputs[i * 28 + j] = (r + g + b) / 3;
+                    /* Map the pixels of canvas `input` to canvas `picture` */
                     picCtx.fillStyle = 'rgb(' + [r, g, b].join(',') + ")";
                     picCtx.fillRect(j * 5, i * 5, 5, 5)
                 }
@@ -93,6 +96,7 @@ window.onload = () => {
                             $('.result tr').eq(j + 1).find('td').eq(i).text(value);
                         }
 
+                        /* Add a style to the maximum */
                         for (let j = 0; j < 10; ++j) {
                             let node = $('.result tr').eq(j + 1).find('td').eq(i);
                             if (j === max_idx) {

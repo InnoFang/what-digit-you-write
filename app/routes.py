@@ -11,6 +11,7 @@ def index():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    # normalized - normalize the data from 0 to 255 to 0 to 1.
     input_data = ((255 - np.array(request.json, dtype=np.uint8)) / 255.0).reshape(1, 784)
     result_of_regression = regression_predict(input_data)
     result_of_cnn = cnn_predict(input_data)
