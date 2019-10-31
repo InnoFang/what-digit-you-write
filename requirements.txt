@@ -7,4 +7,4 @@ Pillow==6.2.0
 packaging==16.8
 pyparsing==2.2.0
 tensorflow-gpu==1.13.1
-Werkzeug==0.15.0
+Werkzeug==0.15.3
