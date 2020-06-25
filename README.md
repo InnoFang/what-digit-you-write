@@ -4,7 +4,7 @@
 
 Handwritten digit recognition implemented by TensorFlow and Flask.
 
-![](https://user-images.githubusercontent.com/15724026/47197705-7a97e780-d39a-11e8-905c-081c84da6b97.gif)
+![](https://cdn.jsdelivr.net/gh/innofang/jotter/source/waht-digit-you-write/screencast.gif)
 
 
 ## Why?
