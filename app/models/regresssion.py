@@ -1,20 +1,18 @@
 import os
 import tensorflow as tf
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Flatten, Activation
+from tensorflow.keras.layers import Flatten, Dense, Activation
 
 
 class LinearRegression(Model):
     def __init__(self):
         super(LinearRegression, self).__init__()
         self.flatten = Flatten()
-        self.W = tf.Variable(tf.random.truncated_normal([784, 10], stddev=0.1))
-        self.b = tf.Variable(tf.random.truncated_normal([10], stddev=0.1))
-        self.a = Activation('softmax')
+        self.d1 = Dense(10, activation='softmax')
 
     def call(self, x, **kwargs):
         x = self.flatten(x)
-        y = self.a(tf.matmul(x, self.W) + self.b)
+        y = self.d1(x)
         return y
 
 
