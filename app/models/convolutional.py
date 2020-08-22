@@ -7,11 +7,11 @@ import os
 class LeNet5(Model):
     def __init__(self):
         super(LeNet5, self).__init__()
-        self.c1 = Conv2D(input_shape=(28, 28, 1), filters=6, kernel_size=(5, 5), strides=1, padding='same', activation='relu')
-        self.p1 = MaxPool2D(pool_size=(2, 2), strides=2, padding='same')
+        self.c1 = Conv2D(filters=6, kernel_size=(5, 5), activation='relu', input_shape=(28, 28, 1))
+        self.p1 = MaxPool2D(pool_size=(2, 2))
 
-        self.c2 = Conv2D(filters=16, kernel_size=(5, 5), strides=1, padding='same', activation='relu')
-        self.p2 = MaxPool2D(pool_size=(2, 2), strides=2, padding='same')
+        self.c2 = Conv2D(filters=16, kernel_size=(5, 5), activation='relu')
+        self.p2 = MaxPool2D(pool_size=(2, 2))
 
         self.flatten = Flatten()
         # self.f3 = Dense(1024, activation='relu')
@@ -57,7 +57,7 @@ if __name__ == '__main__':
                                                      save_best_only=True)
 
     model.fit(x_train, y_train,
-                   batch_size=32,
+                   batch_size=128,
                    epochs=5,
                    validation_data=(x_test, y_test),
                    validation_freq=1,
