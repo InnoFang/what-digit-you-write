@@ -7,10 +7,10 @@ import os
 class LeNet5(Model):
     def __init__(self):
         super(LeNet5, self).__init__()
-        self.c1 = Conv2D(input_shape=(28, 28, 1), filters=32, kernel_size=(5, 5), strides=1, padding='same', activation='relu')
+        self.c1 = Conv2D(input_shape=(28, 28, 1), filters=6, kernel_size=(5, 5), strides=1, padding='same', activation='relu')
         self.p1 = MaxPool2D(pool_size=(2, 2), strides=2, padding='same')
 
-        self.c2 = Conv2D(filters=64, kernel_size=(5, 5), strides=1, padding='same', activation='relu')
+        self.c2 = Conv2D(filters=16, kernel_size=(5, 5), strides=1, padding='same', activation='relu')
         self.p2 = MaxPool2D(pool_size=(2, 2), strides=2, padding='same')
 
         self.flatten = Flatten()
