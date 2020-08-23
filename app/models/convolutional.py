@@ -1,36 +1,6 @@
 import tensorflow as tf
-from tensorflow.keras.layers import Conv2D, MaxPool2D, Dropout, Flatten, Dense
-from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Conv2D, MaxPool2D, Flatten, Dense
 import os
-
-
-class LeNet5(Model):
-    def __init__(self):
-        super(LeNet5, self).__init__()
-        self.c1 = Conv2D(filters=6, kernel_size=(5, 5), activation='relu', input_shape=(28, 28, 1))
-        self.p1 = MaxPool2D(pool_size=(2, 2))
-
-        self.c2 = Conv2D(filters=16, kernel_size=(5, 5), activation='relu')
-        self.p2 = MaxPool2D(pool_size=(2, 2))
-
-        self.flatten = Flatten()
-        self.f3 = Dense(120, activation='relu')
-        self.f4 = Dense(84, activation='relu')
-        self.f5 = Dense(10, activation='softmax')
-
-    def call(self, x, **kwargs):
-        x = self.c1(x)
-        x = self.p1(x)
-
-        x = self.c2(x)
-        x = self.p2(x)
-
-        x = self.flatten(x)
-        x = self.f3(x)
-        x = self.f4(x)
-        y = self.f5(x)
-        return y
-
 
 if __name__ == '__main__':
     (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
@@ -38,7 +8,16 @@ if __name__ == '__main__':
     x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
     x_train, x_test = x_train / 255.0, x_test / 255.0
 
-    model = LeNet5()
+    model = tf.keras.models.Sequential([
+        Conv2D(filters=6, kernel_size=(5, 5), activation='relu', input_shape=(28, 28, 1)),
+        MaxPool2D(pool_size=(2, 2)),
+        Conv2D(filters=16, kernel_size=(5, 5), activation='relu'),
+        MaxPool2D(pool_size=(2, 2)),
+        Flatten(),
+        Dense(120, activation='relu'),
+        Dense(84, activation='relu'),
+        Dense(10, activation='softmax')
+    ])
 
     model.compile(optimizer='adam',
                   loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False),
@@ -53,10 +32,12 @@ if __name__ == '__main__':
                                                      save_best_only=True)
 
     model.fit(x_train, y_train,
-                   batch_size=128,
-                   epochs=5,
-                   validation_data=(x_test, y_test),
-                   validation_freq=1,
-                   callbacks=[cp_callback])
+              batch_size=128,
+              epochs=5,
+              validation_data=(x_test, y_test),
+              validation_freq=1,
+              callbacks=[cp_callback])
+
+    model.save('convolutional.h5')
 
     model.summary()
