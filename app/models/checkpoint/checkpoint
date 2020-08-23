@@ -1,2 +1,2 @@
-model_checkpoint_path: "LeNet5.ckpt"
-all_model_checkpoint_paths: "LeNet5.ckpt"
+model_checkpoint_path: "Regression.ckpt"
+all_model_checkpoint_paths: "Regression.ckpt"
