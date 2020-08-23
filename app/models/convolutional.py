@@ -14,8 +14,6 @@ class LeNet5(Model):
         self.p2 = MaxPool2D(pool_size=(2, 2))
 
         self.flatten = Flatten()
-        # self.f3 = Dense(1024, activation='relu')
-        # self.d3 = Dropout(0.2)
         self.f3 = Dense(120, activation='relu')
         self.f4 = Dense(84, activation='relu')
         self.f5 = Dense(10, activation='softmax')
@@ -28,8 +26,6 @@ class LeNet5(Model):
         x = self.p2(x)
 
         x = self.flatten(x)
-        # x = self.f3(x)
-        # x = self.d3(x)
         x = self.f3(x)
         x = self.f4(x)
         y = self.f5(x)
