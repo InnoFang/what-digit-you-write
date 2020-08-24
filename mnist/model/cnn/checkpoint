@@ -1,2 +1,0 @@
-model_checkpoint_path: "F:/PyCharm Project/what-digit-you-write/mnist\\model/cnn\\cnn-1000"
-all_model_checkpoint_paths: "F:/PyCharm Project/what-digit-you-write/mnist\\model/cnn\\cnn-1000"
