@@ -1,25 +1,17 @@
 # What digit you write?
 
-[![](https://img.shields.io/badge/LICENSE-WTFPL-orange.svg)](./LICENSE)
+![](https://img.shields.io/badge/TensorFlow-2.1-orange) ![](https://img.shields.io/badge/Python-3.7-blue)
 
-Handwritten digit recognition implemented by TensorFlow and Flask.
+Handwritten digit recognition application implemented by TensorFlow2 + Keras and Flask.
 
 ![](https://cdn.jsdelivr.net/gh/innofang/jotter/source/waht-digit-you-write/screencast.gif)
-
-
-## Why?
-
-Just for learning by doing. After learning Flask and TensorFlow, I think I suppose to build something interesting in order to combine with Flask and TensorFlow. 
-
-In this project, I use TensorFlow to train the model and use Flask as the server, for front-end, I make a canvas to draw digit, It's easy to understand and learn. 
-
 
 ## How to run?
 
 ```
 $ git clone https://github.com/InnoFang/what-digit-you-write.git
 $ cd what-digit-you-write
-$ pip install -r requirements.txt
+$ conda create --name <env> --file requirements.txt
 $ python app.py
 ```
 
