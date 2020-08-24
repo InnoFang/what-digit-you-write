@@ -1,6 +1,5 @@
 import numpy as np
 from app import app
-from PIL import Image
 from flask import render_template, request, jsonify
 from app.prediction import predict_by_regression, predict_by_cnn
 
