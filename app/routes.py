@@ -1,7 +1,7 @@
 import numpy as np
 from app import app
 from flask import render_template, request, jsonify
-from app.prediction import predict_by_regression, predict_by_cnn
+from app.predictors import predict_by_regression, predict_by_cnn
 
 
 @app.route('/', methods=['GET'])
