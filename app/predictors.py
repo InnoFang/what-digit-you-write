@@ -10,11 +10,6 @@ class RegressionPredictor(object):
             cls.__model = load_model('app/models/regression.h5')
         return cls.__instance
 
-
-    @staticmethod
-    def fit():
-        print("fit")
-
     @staticmethod
     def predict(input_data):
         assert RegressionPredictor.__model, \
@@ -31,7 +26,6 @@ class CNNPredictor(object):
             cls.__instance = super().__new__(cls)
             cls.__model = load_model('app/models/convolutional.h5')
         return cls.__instance
-
 
     @staticmethod
     def predict(input_data):
