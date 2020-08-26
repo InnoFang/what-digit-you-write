@@ -1,4 +1,5 @@
 import os
+import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.keras.layers import Flatten, Dense
 
@@ -23,7 +24,7 @@ if __name__ == '__main__':
                                                      save_weights_only=True,
                                                      save_best_only=True)
 
-    model.fit(x_train, y_train,
+    history = model.fit(x_train, y_train,
               batch_size=32,
               epochs=20,
               validation_data=(x_test, y_test),
@@ -33,3 +34,21 @@ if __name__ == '__main__':
     model.save('regression.h5')
 
     model.summary()
+
+    acc = history.history['sparse_categorical_accuracy']
+    val_acc = history.history['val_sparse_categorical_accuracy']
+    loss = history.history['loss']
+    val_loss = history.history['val_loss']
+
+    plt.subplot(1, 2, 1)
+    plt.plot(acc, label='Training Accuracy')
+    plt.plot(val_acc, label='Validation Accuracy')
+    plt.title('Training and Validation Accuracy')
+    plt.legend()
+
+    plt.subplot(1, 2, 2)
+    plt.plot(loss, label='Training Loss')
+    plt.plot(val_loss, label='Validation Loss')
+    plt.title('Training and Validation Loss')
+    plt.legend()
+    plt.show()
