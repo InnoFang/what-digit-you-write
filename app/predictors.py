@@ -13,7 +13,7 @@ class RegressionPredictor(object):
     @staticmethod
     def predict(input_data):
         assert RegressionPredictor.__model, \
-            "Use 'RegressionPredictor()' to initialize before using 'RegressionPredictor.fit()'"
+            "Use 'RegressionPredictor()' to initialize before using 'RegressionPredictor.predict()'"
         x = input_data.reshape(1, 28, 28)
         return RegressionPredictor.__model.predict(x).flatten().tolist()
 
@@ -29,6 +29,6 @@ class CNNPredictor(object):
 
     @staticmethod
     def predict(input_data):
-        assert CNNPredictor.__model, "Use 'CNNPredictor()' to initialize before using 'CNNPredictor.fit()'"
+        assert CNNPredictor.__model, "Use 'CNNPredictor()' to initialize before using 'CNNPredictor.predict()'"
         x = input_data.reshape(1, 28, 28, 1)
         return CNNPredictor.__model.predict(x).flatten().tolist()
