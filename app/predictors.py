@@ -1,13 +1,40 @@
-import tensorflow as tf
+from tensorflow.keras.models import load_model
 
 
-def predict_by_regression(x_predict):
-    x_predict = x_predict.reshape(1, 28, 28)
-    model = tf.keras.models.load_model('app/models/regression.h5')
-    return model.predict(x_predict).flatten().tolist()
+class RegressionPredictor(object):
+    __model = None
+
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(cls, '__instance'):
+            cls.__instance = super().__new__(cls)
+            cls.__model = load_model('app/models/regression.h5')
+        return cls.__instance
 
 
-def predict_by_cnn(x_predict):
-    x_predict = x_predict.reshape(1, 28, 28, 1)
-    model = tf.keras.models.load_model('app/models/convolutional.h5')
-    return model.predict(x_predict).flatten().tolist()
+    @staticmethod
+    def fit():
+        print("fit")
+
+    @staticmethod
+    def predict(input_data):
+        assert RegressionPredictor.__model, \
+            "Use 'RegressionPredictor()' to initialize before using 'RegressionPredictor.fit()'"
+        x = input_data.reshape(1, 28, 28)
+        return RegressionPredictor.__model.predict(x).flatten().tolist()
+
+
+class CNNPredictor(object):
+    __model = None
+
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(cls, '__instance'):
+            cls.__instance = super().__new__(cls)
+            cls.__model = load_model('app/models/convolutional.h5')
+        return cls.__instance
+
+
+    @staticmethod
+    def predict(input_data):
+        assert CNNPredictor.__model, "Use 'CNNPredictor()' to initialize before using 'CNNPredictor.fit()'"
+        x = input_data.reshape(1, 28, 28, 1)
+        return CNNPredictor.__model.predict(x).flatten().tolist()
