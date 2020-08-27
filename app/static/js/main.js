@@ -60,7 +60,7 @@ window.onload = () => {
         img.onload = function () {
             let inputs = [];
             const input = document.createElement("canvas").getContext('2d');
-            /* Map the original data size to a size of 28*28 (28 * 28 = 784) */
+            /* Map the original data size to 28*28 (28 * 28 = 784) */
             input.drawImage(img, 0, 0, img.width, img.height, 0, 0, 28, 28);
             let data = input.getImageData(0, 0, 28, 28).data;
             for (let i = 0; i < 28; ++i) {
@@ -92,7 +92,8 @@ window.onload = () => {
                                 max = tmp;
                                 max_idx = j;
                             }
-                            value = parseFloat(value.toFixed(3));
+                            /* Format the predicted value with three decimal */
+                            value = value.toFixed(3);
                             $('.result tr').eq(j + 1).find('td').eq(i).text(value);
                         }
 
