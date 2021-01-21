@@ -21,3 +21,14 @@ If the clone is too slow, you can use the following method
 ```shell script
 $ # git clone --depth 1 https://github.com.cnpmjs.org/InnoFang/what-digit-you-write.git 
 ```
+
+### docker env
+
+see `Dockerfile` for how the environment is built
+
+````
+$ git clone --depth 1 https://github.com/InnoFang/what-digit-you-write.git
+$ cd what-digit-you-write
+$ docker build -t ml-digit .
+$ docker run -it -p 5000:5000 ml-digit
+````
